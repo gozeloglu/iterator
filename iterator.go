@@ -6,6 +6,7 @@ type Iterator interface {
 	HasPrev() bool
 	Next() any
 	Prev() any
+	ToSlice() []any
 }
 
 // Iter keeps data and index.
@@ -53,4 +54,9 @@ func (i *Iter) Prev() any {
 		return v
 	}
 	return nil
+}
+
+// ToSlice returns data.
+func (i *Iter) ToSlice() []any {
+	return i.arr
 }

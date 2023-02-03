@@ -16,4 +16,7 @@ func main() {
 		v := iter.Prev()
 		fmt.Println(v)
 	}
+
+	iterSlice := iter.ToSlice()
+	fmt.Println(iterSlice)
 }
