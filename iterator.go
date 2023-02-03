@@ -3,7 +3,9 @@ package iterator
 // Iterator interface contains the iterator functions.
 type Iterator interface {
 	HasNext() bool
+	HasPrev() bool
 	Next() any
+	Prev() any
 }
 
 // Iter keeps data and index.
@@ -20,9 +22,14 @@ func New(a ...any) *Iter {
 	return i
 }
 
-// HasNext returns whether iter has element.
+// HasNext returns whether iter has element in next.
 func (i *Iter) HasNext() bool {
 	return i.idx < len(i.arr)
+}
+
+// HasPrev returns whether iter has element in previous.
+func (i *Iter) HasPrev() bool {
+	return i.idx >= 0 && i.idx <= len(i.arr) && len(i.arr) != 0
 }
 
 // Next returns next element.
@@ -30,6 +37,19 @@ func (i *Iter) Next() any {
 	if i.HasNext() {
 		v := i.arr[i.idx]
 		i.idx++
+		return v
+	}
+	return nil
+}
+
+// Prev returns previous element.
+func (i *Iter) Prev() any {
+	if i.HasPrev() {
+		if i.idx == len(i.arr) {
+			i.idx--
+		}
+		v := i.arr[i.idx]
+		i.idx--
 		return v
 	}
 	return nil

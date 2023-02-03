@@ -11,4 +11,9 @@ func main() {
 		v := iter.Next()
 		fmt.Println(v)
 	}
+
+	for iter.HasPrev() {
+		v := iter.Prev()
+		fmt.Println(v)
+	}
 }
