@@ -18,8 +18,9 @@ type Iter struct {
 // New creates *Iter object by given elements in parameter. If nothing is passed
 // it creates an empty slice.
 func New(a ...any) *Iter {
+	var arr []any
 	i := &Iter{
-		arr: make([]any, len(a)),
+		arr: arr,
 	}
 	i.arr = append(i.arr, a...)
 	return i
@@ -35,9 +36,12 @@ func (i *Iter) HasPrev() bool {
 	return i.idx >= 0 && i.idx <= len(i.arr) && len(i.arr) != 0
 }
 
-// Next returns next element.
+// Next returns the next element. If there is no next element, it returns nil.
 func (i *Iter) Next() any {
 	if i.HasNext() {
+		if i.idx < 0 {
+			i.idx = 0
+		}
 		v := i.arr[i.idx]
 		i.idx++
 		return v
@@ -45,7 +49,7 @@ func (i *Iter) Next() any {
 	return nil
 }
 
-// Prev returns previous element.
+// Prev returns previous element. If there is no previous element, it returns nil.
 func (i *Iter) Prev() any {
 	if i.HasPrev() {
 		if i.idx == len(i.arr) {
