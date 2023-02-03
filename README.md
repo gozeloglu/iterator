@@ -32,3 +32,7 @@ func main() {
 	it.ToSlice()    // Retrieve all elements in slice
 }
 ```
+
+## LICENSE
+
+[MIT](LICENSE)
