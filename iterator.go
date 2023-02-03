@@ -18,7 +18,9 @@ type Iter struct {
 // New creates *Iter object by given elements in parameter. If nothing is passed
 // it creates an empty slice.
 func New(a ...any) *Iter {
-	i := &Iter{}
+	i := &Iter{
+		arr: make([]any, len(a)),
+	}
 	i.arr = append(i.arr, a...)
 	return i
 }
