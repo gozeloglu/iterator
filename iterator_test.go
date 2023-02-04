@@ -25,6 +25,11 @@ func TestIter_HasNext(t *testing.T) {
 			hasNext:  true,
 		},
 		{
+			name:     "Non-empty iterator, 1-length",
+			elements: []any{1},
+			hasNext:  true,
+		},
+		{
 			name:     "Non-empty iterator, non-zero index",
 			elements: []any{1, 2, 3, 4},
 			idx:      2,
@@ -33,7 +38,7 @@ func TestIter_HasNext(t *testing.T) {
 		{
 			name:     "Non-empty iterator, last index",
 			elements: []any{1, 2, 3, 4},
-			idx:      2, // TODO Check this part
+			idx:      3,
 			hasNext:  true,
 		},
 		{
@@ -132,6 +137,10 @@ func TestIter_HasPrev(t *testing.T) {
 			idx:      0,
 		},
 		{
+			name:     "Non-empty iterator, 1-length",
+			elements: []any{1},
+		},
+		{
 			name:     "Non-empty iterator, non-zero index",
 			elements: []any{1, 2, 3, 4},
 			idx:      2,
@@ -140,7 +149,7 @@ func TestIter_HasPrev(t *testing.T) {
 		{
 			name:     "Non-empty iterator, last index",
 			elements: []any{1, 2, 3, 4},
-			idx:      2, // TODO Check this part
+			idx:      3,
 			hasPrev:  true,
 		},
 		{
@@ -187,13 +196,13 @@ func TestIter_Prev(t *testing.T) {
 		{
 			name:     "Non-empty iterator, non-zero index",
 			elements: []any{1, 2, 3, 4, 5},
-			idx:      1, // TODO Check this part
+			idx:      1,
 			expVal:   2,
 		},
 		{
 			name:     "Non-empty iterator, last index",
 			elements: []any{1, 2, 3, 4, 5},
-			idx:      3, // TODO Check this part
+			idx:      3,
 			expVal:   4,
 		},
 		{

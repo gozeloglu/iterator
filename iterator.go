@@ -33,34 +33,33 @@ func (i *Iter) HasNext() bool {
 
 // HasPrev returns whether iter has element in previous.
 func (i *Iter) HasPrev() bool {
-	// TODO Check conditions
-	return (i.idx-1) >= 0 && (i.idx-1) <= len(i.arr) && len(i.arr) != 0
+	return i.idx > 0 && i.idx <= len(i.arr) && len(i.arr) != 0
 }
 
 // Next returns the next element. If there is no next element, it returns nil.
 func (i *Iter) Next() any {
-	if i.HasNext() {
-		if i.idx < 0 {
-			i.idx = 0
-		}
-		v := i.arr[i.idx]
-		i.idx++
-		return v
+	if !i.HasNext() {
+		return nil
 	}
-	return nil
+	if i.idx < 0 {
+		i.idx = 0
+	}
+	v := i.arr[i.idx]
+	i.idx++
+	return v
 }
 
 // Prev returns previous element. If there is no previous element, it returns nil.
 func (i *Iter) Prev() any {
-	if i.HasPrev() {
-		if i.idx == len(i.arr) {
-			i.idx--
-		}
-		v := i.arr[i.idx]
-		i.idx--
-		return v
+	if !i.HasPrev() {
+		return nil
 	}
-	return nil
+	if i.idx == len(i.arr) {
+		i.idx--
+	}
+	v := i.arr[i.idx]
+	i.idx--
+	return v
 }
 
 // ToSlice returns data.
