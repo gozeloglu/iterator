@@ -224,3 +224,34 @@ func TestIter_Prev(t *testing.T) {
 		})
 	}
 }
+
+func TestIter_ToSlice(t *testing.T) {
+	testCases := []struct {
+		name     string
+		elements []any
+	}{
+		{
+			name:     "Empty iterator",
+			elements: []any{},
+		},
+		{
+			name:     "Non-empty iterator",
+			elements: []any{1, 2, 3, 4},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			it := New(tc.elements...)
+			got := it.ToSlice()
+			if len(tc.elements) != len(got) {
+				t.Fatalf("expected length: %d\nactual lenght: %d\n", len(tc.elements), len(got))
+			}
+			for i, e := range got {
+				if e != tc.elements[i] {
+					t.Fatalf("expected element: %v\nactual element: %v\n", tc.elements[i], e)
+				}
+			}
+		})
+	}
+}
