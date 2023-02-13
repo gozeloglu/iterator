@@ -33,6 +33,22 @@ func main() {
 }
 ```
 
+## Running tests
+
+You can run the test with following command.
+
+```shell
+go test
+go test -v  # verbose output
+```
+
+You can also get code coverage with the following command.
+
+```shell
+go test -cover
+go test -cover -v # verbose output
+```
+
 ## LICENSE
 
 [MIT](LICENSE)

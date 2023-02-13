@@ -1,14 +1,5 @@
 package iterator
 
-// Iterator interface contains the iterator functions.
-type Iterator interface {
-	HasNext() bool
-	HasPrev() bool
-	Next() any
-	Prev() any
-	ToSlice() []any
-}
-
 // Iter keeps data and index.
 type Iter struct {
 	arr []any
