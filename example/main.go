@@ -23,4 +23,12 @@ func main() {
 
 	iterSlice := iter.ToSlice()
 	fmt.Println(iterSlice)
+
+	iter.First()     // update the cursor
+	v := iter.Next() // v should be 1
+	fmt.Println(v)   // prints 1
+
+	iter.Last()
+	v = iter.Next()
+	fmt.Println(v) // prints 6
 }

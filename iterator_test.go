@@ -225,6 +225,122 @@ func TestIter_Prev(t *testing.T) {
 	}
 }
 
+func TestIter_First(t *testing.T) {
+	testCases := []struct {
+		name     string
+		elements []any
+		idx      int
+	}{
+		{
+			name:     "Empty iterator",
+			elements: []any{},
+		},
+		{
+			name:     "Non-empty iterator, -1 index",
+			elements: []any{1, 2, 3},
+			idx:      -1,
+		},
+		{
+			name:     "Non-empty iterator, fresh index",
+			elements: []any{1, 2, 3},
+			idx:      0,
+		},
+		{
+			name:     "Non-empty iterator, 1-length",
+			elements: []any{1},
+			idx:      0,
+		},
+		{
+			name:     "Non-empty iterator, non-zero index",
+			elements: []any{1, 2, 3, 4},
+			idx:      2,
+		},
+		{
+			name:     "Non-empty iterator, last index",
+			elements: []any{1, 2, 3, 4},
+			idx:      3,
+		},
+		{
+			name:     "Non-empty iterator, out of index",
+			elements: []any{1, 2, 3, 4},
+			idx:      4,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			expIdx := 0
+			it := New(tc.elements...)
+			it.idx = tc.idx
+			it.First()
+			if it.idx != expIdx {
+				t.Errorf("expected idx: %d\nactual idx: %d\n", expIdx, it.idx)
+			}
+		})
+	}
+}
+
+func TestIter_Last(t *testing.T) {
+	testCases := []struct {
+		name     string
+		elements []any
+		idx      int
+		expIdx   int
+	}{
+		{
+			name:     "Empty iterator",
+			elements: []any{},
+		},
+		{
+			name:     "Non-empty iterator, -1 index",
+			elements: []any{1, 2, 3},
+			idx:      -1,
+			expIdx:   2,
+		},
+		{
+			name:     "Non-empty iterator, fresh index",
+			elements: []any{1, 2, 3},
+			idx:      0,
+			expIdx:   2,
+		},
+		{
+			name:     "Non-empty iterator, 1-length",
+			elements: []any{1},
+			idx:      0,
+			expIdx:   0,
+		},
+		{
+			name:     "Non-empty iterator, non-zero index",
+			elements: []any{1, 2, 3, 4},
+			idx:      2,
+			expIdx:   3,
+		},
+		{
+			name:     "Non-empty iterator, last index",
+			elements: []any{1, 2, 3, 4},
+			idx:      3,
+			expIdx:   3,
+		},
+		{
+			name:     "Non-empty iterator, out of index",
+			elements: []any{1, 2, 3, 4},
+			idx:      4,
+			expIdx:   3,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			it := New(tc.elements...)
+			it.idx = tc.idx
+			it.Last()
+			if it.idx != tc.expIdx {
+				t.Errorf("expected idx: %d\nactual idx: %d\n", tc.expIdx, it.idx)
+			}
+		})
+	}
+}
+
 func TestIter_ToSlice(t *testing.T) {
 	testCases := []struct {
 		name     string

@@ -30,6 +30,8 @@ func main() {
 	it.Prev()   // Retrieve previous element if exists
 	it.HasPrev()    // Check whether there is element in previous
 	it.ToSlice()    // Retrieve all elements in slice
+	it.First()  // Updates the cursor by moving first index
+	it.Last()   // Updates the cursor by moving last index
 }
 ```
 

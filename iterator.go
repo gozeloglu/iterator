@@ -53,6 +53,21 @@ func (i *Iter) Prev() any {
 	return v
 }
 
+// First updates the cursor by moving to first index.
+func (i *Iter) First() {
+	i.idx = 0
+}
+
+// Last updates the cursor by moving to last index. If array is empty, the cursor
+// will be zero.
+func (i *Iter) Last() {
+	if len(i.arr) == 0 {
+		i.idx = 0
+		return
+	}
+	i.idx = len(i.arr) - 1
+}
+
 // ToSlice returns data.
 func (i *Iter) ToSlice() []any {
 	return i.arr
