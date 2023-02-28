@@ -25,10 +25,9 @@ import "github.com/gozeloglu/iterator"
 
 func main() {
 	it := iterator.New(1,2,3,4)
-	it.Next()   // Retrieve next element if exists
-	it.HasNext()    // Check whether there is element in next
-	it.Prev()   // Retrieve previous element if exists
-	it.HasPrev()    // Check whether there is element in previous
+	it.Next()   // Check whether there is element in next
+	it.Value()  // Retrieve next element if exists
+	it.Prev()   // Check whether there is element in prev
 	it.ToSlice()    // Retrieve all elements in slice
 	it.First()  // Updates the cursor by moving first index
 	it.Last()   // Updates the cursor by moving last index

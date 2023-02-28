@@ -12,50 +12,43 @@ func New(a ...any) *Iter {
 	var arr []any
 	i := &Iter{
 		arr: arr,
+		idx: -1,
 	}
 	i.arr = append(i.arr, a...)
 	return i
 }
 
-// HasNext returns whether iter has element in next.
-func (i *Iter) HasNext() bool {
-	return i.idx < len(i.arr)
-}
-
-// HasPrev returns whether iter has element in previous.
-func (i *Iter) HasPrev() bool {
-	return i.idx > 0 && i.idx <= len(i.arr) && len(i.arr) != 0
-}
-
-// Next returns the next element. If there is no next element, it returns nil.
-func (i *Iter) Next() any {
-	if !i.HasNext() {
-		return nil
+// Next returns whether iter has element in next. If there is no next element,
+// it returns false.
+func (i *Iter) Next() bool {
+	if i.idx < -1 {
+		i.idx = -1
 	}
-	if i.idx < 0 {
-		i.idx = 0
-	}
-	v := i.arr[i.idx]
 	i.idx++
-	return v
+	return i.hasNext()
 }
 
-// Prev returns previous element. If there is no previous element, it returns nil.
-func (i *Iter) Prev() any {
-	if !i.HasPrev() {
+// Prev returns whether iter has element in prev. If there is no previous
+// element, it returns false.
+func (i *Iter) Prev() bool {
+	if i.idx > len(i.arr) {
+		i.idx = len(i.arr)
+	}
+	i.idx--
+	return i.hasPrev()
+}
+
+// Value returns current value. If there is no value, it returns nil.
+func (i *Iter) Value() any {
+	if i.idx < 0 || i.idx >= len(i.arr) {
 		return nil
 	}
-	if i.idx == len(i.arr) {
-		i.idx--
-	}
-	v := i.arr[i.idx]
-	i.idx--
-	return v
+	return i.arr[i.idx]
 }
 
 // First updates the cursor by moving to first index.
 func (i *Iter) First() {
-	i.idx = 0
+	i.idx = -1
 }
 
 // Last updates the cursor by moving to last index. If array is empty, the cursor
@@ -65,10 +58,20 @@ func (i *Iter) Last() {
 		i.idx = 0
 		return
 	}
-	i.idx = len(i.arr) - 1
+	i.idx = len(i.arr)
 }
 
 // ToSlice returns data.
 func (i *Iter) ToSlice() []any {
 	return i.arr
+}
+
+// hasNext returns whether iter has element in next.
+func (i *Iter) hasNext() bool {
+	return i.idx < len(i.arr)
+}
+
+// hasPrev returns whether iter has element in previous.
+func (i *Iter) hasPrev() bool {
+	return (i.idx+1) > 0 && (i.idx+1) <= len(i.arr) && len(i.arr) != 0
 }

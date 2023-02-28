@@ -7,17 +7,17 @@ import (
 
 func main() {
 	iter := iterator.New(1, 2, 3, 4, 5, 6)
-	for iter.HasNext() {
-		v := iter.Next()
+	for iter.Next() {
+		v := iter.Value()
 		fmt.Println(v)
 	}
 
-	for iter.HasPrev() {
-		v := iter.Prev()
+	for iter.Prev() {
+		v := iter.Value()
 		fmt.Println(v)
 	}
-	for iter.HasNext() {
-		v := iter.Next()
+	for iter.Next() {
+		v := iter.Value()
 		fmt.Println(v)
 	}
 
